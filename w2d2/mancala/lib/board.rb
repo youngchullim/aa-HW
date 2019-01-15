@@ -46,21 +46,16 @@ class Board
       @cups[i] << :stone
     end
     render
-    # puts "@@@@@@@@@@"
-    # puts i
-    # puts "@@@@@@@@"
-    next_turn(i,current_player_name)
+    next_turn(i)
   end
 
-  def next_turn(ending_cup_idx, current_player_name)
-    # p @cups[ending_cup_idx]
-    if @cups[ending_cup_idx].empty?
+  def next_turn(ending_cup_idx)
+
+    if ending_cup_idx == 6 || ending_cup_idx == 13
+      return :prompt
+    elsif @cups[ending_cup_idx].length == 1
       return :switch
-    elsif ending_cup_idx == 6 && current_player_name = @name1
-      return :prompt
-    elsif ending_cup_idx == 13 && current_player_name = @name2
-      return :prompt
-    elsif @cups[ending_cup_idx].count > 0
+    elsif @cups[ending_cup_idx].count > 1
       return ending_cup_idx
     end
   end
